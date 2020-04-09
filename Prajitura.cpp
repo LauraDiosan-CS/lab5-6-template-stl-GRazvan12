@@ -109,32 +109,30 @@ Prajitura& Prajitura::operator=(const Prajitura& p) {
 	return *this;
 }
 
+//Desc: compara doua prajituri
+//In: doua prajituri (prajitura curenta si p)
+//Out: true/false
+bool Prajitura::operator==(const Prajitura& p) {
+	return ((this->id == p.id) && (this->nume == p.nume) && (this->ingrediente == p.ingrediente) && (this->pret == p.pret));
+}
+
 //Overload pentru operatorii IO
 
 //Desc: incarca o prajitura dintr-un stream de intrare
 //In: un stream de intrare
 //Out: un obiect nou de tip Prajitura
 istream& operator>>(istream& is, Prajitura& p) {
-	int id;
-	cout << "id = ";
-	is >> id;
+	//cout << "p.id = ";
+	is >> p.id;
 
-	string nume;
-	cout << "nume = ";
-	is >> nume;
+	//cout << "p.nume = ";
+	is >> p.nume;
 
-	string ingrediente;
-	cout << "ingrediente = ";
-	is >> ingrediente;
+	//cout << "p.ingrediente = ";
+	is >> p.ingrediente;
 
-	double pret;
-	cout << "pret: ";
-	is >> pret;
-
-	p.setID(id);
-	p.setNume(nume);
-	p.setIngrediente(ingrediente);
-	p.setPret(pret);
+	//cout << "p.pret: ";
+	is >> p.pret;
 
 	return is;
 }
@@ -143,7 +141,7 @@ istream& operator>>(istream& is, Prajitura& p) {
 //In: un stream de iesire si un produs
 //Out: streamul de iesire incarcat cu informatia din prajitura
 ostream& operator<<(ostream& os, const Prajitura& p) {
-	os << "ID: " << p.id << " Nume: " << p.nume << " Ingrediente: " << p.ingrediente << "  Pret: " << p.pret << '\n';
+	os << p.id << " " << p.nume << " " << p.ingrediente << " " << p.pret << '\n';
 
 	return os;
 }

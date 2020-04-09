@@ -1,6 +1,6 @@
 #include "Repo.h"
 #include <iostream>
-
+/*
 Repo::Repo()
 {
 }
@@ -25,11 +25,11 @@ void Repo::updatePrajitura(int poz, const Prajitura& p) {
 //Desc: acceseaza lista de prajituri unui repo
 //In: un obiect de tip repo
 //Out: lista de prajituri
-/*
+
 vector<Prajitura> Repo::getAll() {
 	return this->prajituri;
 }
-*/
+
 
 Prajitura Repo::getPoz(int poz) {
 	return this->prajituri.getElemPos(poz);
@@ -56,4 +56,4 @@ Repo& Repo::operator=(const Repo& r) {
 	this->prajituri = r.prajituri;
 
 	return *this;
-}
+}*/

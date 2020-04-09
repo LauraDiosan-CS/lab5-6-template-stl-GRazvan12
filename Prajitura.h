@@ -25,6 +25,7 @@ public:
 	double getPret();
 	
 	Prajitura& operator=(const Prajitura& p);
+	bool operator==(const Prajitura& p);
 
 	friend istream& operator>>(istream& is, Prajitura& p);
 	friend ostream& operator<<(ostream& os, const Prajitura& p);
