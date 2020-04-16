@@ -1,5 +1,6 @@
 #pragma once
 #include "RepoFile.h"
+#include <map>
 
 class Service {
 private:
@@ -16,4 +17,6 @@ public:
 	vector<Prajitura> getAll();
 	int getSize();
 	Service& operator=(Service& s);
+	vector<string> getIngrediente();
+	map< string, pair<double, int> > getNrPraj_Pret_perIngredient();
 };

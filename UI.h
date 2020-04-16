@@ -9,6 +9,7 @@ private:
 	void stergere();
 	void modificare();
 	void afisare();
+	void afisare_medie_ingrediente();
 public:
 	UI();
 	UI(Service& s);

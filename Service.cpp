@@ -132,3 +132,50 @@ Service& Service::operator=(Service& s) {
 
 	return *this;
 }
+
+//Desc: ia lista cu toate ingredientele care apar in prajiturile din lista
+//In: -
+//Out: lista de ingrediente care apar in prajituri
+vector<string> Service::getIngrediente() {
+	vector<Prajitura> lista = this->repo->getAll();
+	vector<string> ingrediente;
+	for (auto i = 0; i < lista.size(); i++) {
+		string ingrCurente = lista[i].getIngrediente();
+		string sep = ",";
+		size_t poz = ingrCurente.find(sep);
+		while (poz != string::npos) {
+			string ingr = ingrCurente.substr(0, poz);
+			if (find(ingrediente.begin(), ingrediente.end(), ingr) == ingrediente.end())
+				ingrediente.push_back(ingr);
+			ingrCurente.erase(0, poz + sep.length());
+			poz = ingrCurente.find(sep);
+		}
+		if(!ingrCurente.empty())
+			if (find(ingrediente.begin(), ingrediente.end(), ingrCurente) == ingrediente.end())
+				ingrediente.push_back(ingrCurente);
+	}
+
+	return ingrediente;
+}
+
+//Desc: pentru fiecare ingredient cauta numarul de prajituri si pretul total al acestora care contin acel ingredient
+//In: -
+//Out: map, fiecare cheie reprezinta ingredientul printr-un string, iar valoarea retinuta este
+//	   de tip pair<double, int> care retin pretul total si numarul de prajituri care contin ingredientul cheie
+map<string, pair<double, int> > Service::getNrPraj_Pret_perIngredient() {
+	vector<Prajitura> prajituri = this->repo->getAll();
+	vector<string> ingrediente = this->getIngrediente();
+	map<string, pair<double, int> > lista;
+	for (auto i = 0; i < ingrediente.size(); i++)
+		lista[ingrediente[i]] = make_pair(0.0, 0);
+	for (auto it = lista.begin(); it != lista.end(); it++) {
+		string ingr = it->first;
+		for (auto i = 0; i < prajituri.size(); i++)
+			if (prajituri[i].getIngrediente().find(ingr) != string::npos) {
+				it->second.first += prajituri[i].getPret();
+				it->second.second += 1;
+			}
+	}
+
+	return lista;
+}

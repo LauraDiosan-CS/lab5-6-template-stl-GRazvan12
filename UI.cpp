@@ -30,6 +30,7 @@ void UI::meniuPrincipal() {
 	cout << "\t2. Stergere prajitura.\n";
 	cout << "\t3. Modificare prajitura.\n";
 	cout << "\t4. Afisare prajituri.\n";
+	cout << "\t5. Afisare medie pret pentru fiecare ingredient.\n";
 	cout << "\tx. Inchidere aplicatie.\n";
 }
 
@@ -109,6 +110,15 @@ void UI::afisare() {
 		cout << *it;
 }
 
+//Desc:afiseaza media preturilor prajiturilor pentru fiecare ingredient 
+//In: -
+//Out: -
+void UI::afisare_medie_ingrediente() {
+	map<string, pair<double, int> > lista = this->serv.getNrPraj_Pret_perIngredient();
+	for (auto it = lista.begin(); it != lista.end(); it++)
+		cout << it->first << ": " << it->second.first / it->second.second << '\n';
+}
+
 void UI::runUI() {
 	bool continua = true;
 	string comanda;
@@ -125,6 +135,9 @@ void UI::runUI() {
 			this->modificare();
 		else if (comanda == "4")
 			this->afisare();
+		else if (comanda == "5") {
+			this->afisare_medie_ingrediente();
+		}
 		else if (comanda == "x") {
 			cout << "Ati parasit aplicatia.\n";
 			continua = false;

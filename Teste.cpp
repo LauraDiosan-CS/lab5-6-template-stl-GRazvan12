@@ -383,6 +383,25 @@ void updatePrajService() {
 	assert((reusit == true) && (p2.getNume() == "tort") && (p2.getIngrediente() == "ciocolata") && (p2.getPret() == 100.5));
 }
 
+//Desc: testeaza functionalitatea pentru clasa Service
+void functionalitateService() {
+	Service s;
+	bool reusit = s.addPrajitura(1, "tarta", "zahar,cacao,lapte", 40);
+	reusit = s.addPrajitura(2, "vafe", "zahar,apa,lapte,oua", 50);
+	reusit = s.addPrajitura(3, "tort", "ciocolata,frisca", 12.12);
+	reusit = s.addPrajitura(4, "macarons", "zahar,ciocolata", 3.65);
+	reusit = s.addPrajitura(5, "cheesecake", "zahar,lapte,oua", 19);
+
+	map<string, pair<double, int> > lista = s.getNrPraj_Pret_perIngredient();
+	assert(lista["zahar"] == make_pair(112.65, 4));
+	assert(lista["cacao"] == make_pair(40.0, 1));
+	assert(lista["lapte"] == make_pair(109.0, 3));
+	assert(lista["apa"] == make_pair(50.0, 1));
+	assert(lista["oua"] == make_pair(69.0, 2));
+	assert(lista["ciocolata"] == make_pair(15.77, 2));
+	assert(lista["frisca"] == make_pair(12.12, 1));
+}
+
 //Desc: gestioneaza testele pentru clasa Service
 void testeService() {
 	constructoriService();
@@ -391,6 +410,7 @@ void testeService() {
 	readPrajService();
 	delPrajService();
 	updatePrajService();
+	functionalitateService();
 }
 
 void teste() {
